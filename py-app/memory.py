@@ -16,11 +16,13 @@ class Chat:
 
 
 class Memory:
-    def __init__(self) -> None:
-        if os.path.exists("context.txt"):
-            os.remove("context.txt")
-        with open("context.txt", "w") as file:
-            file.write("")
+    def __init__(self, recall=True) -> None:
+        if not recall:
+            if os.path.exists("context.txt"):
+                os.remove("context.txt")
+        if not os.path.exists("context.txt"):
+            with open("context.txt", "w") as file:
+                file.write("")
 
     def remember(self, role, content):
         with open("context.txt", "a") as file:
