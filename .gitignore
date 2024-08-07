@@ -2,3 +2,4 @@
 *.txt
 __*
 */.venv
+*/node_modules
