@@ -1,5 +1,5 @@
 *.env
-*.txt
+context.txt
 __*
 */.venv
 */node_modules

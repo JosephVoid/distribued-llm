@@ -1,0 +1,44 @@
+services:
+  node:
+    build:
+      context: ./js-app
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - my-net
+    depends_on:
+      - mysqldb
+      - pyapi
+  pycli:
+    build:
+      context: ./py-app
+      dockerfile: dockerfile
+    command: ["python", "app.py", "cli", "recall"]
+  pyapi:
+    build:
+      context: ./py-app
+      dockerfile: dockerfile
+    ports:
+      - 5005:5000
+    networks:
+      - my-net
+    command: ["python", "app.py", "api"]
+  mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - 3307:3306
+    networks:
+      - my-net
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+    volumes:
+      - mysql:/var/lib/mysql
+
+networks:
+  my-net:
+
+volumes:
+  mysql:

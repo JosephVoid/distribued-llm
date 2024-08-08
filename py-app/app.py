@@ -37,7 +37,7 @@ def request_model(prompt: str, model: str) -> str:
         return model_response
     except Exception as inst:
         print(inst)
-        return "Error"
+        return repr(inst)
 
 
 def run_cli():
@@ -94,7 +94,7 @@ def main():
         run_cli()
     elif mode == "api":
         app = run_api()
-        app.run(debug=True)
+        app.run(host="0.0.0.0")
     else:
         print("Invalid mode specified. Use 'cli' or 'api'.")
         sys.exit(1)
