@@ -42,4 +42,4 @@
 If you want to use the python cli
 
 1. `cd py-app`
-2. `docker build -t pycli . && docker run -it pycli cli recall`
+2. `docker build -t pycli . && docker run -it pycli`

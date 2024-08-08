@@ -10,11 +10,6 @@ services:
     depends_on:
       - mysqldb
       - pyapi
-  pycli:
-    build:
-      context: ./py-app
-      dockerfile: dockerfile
-    command: ["python", "app.py", "cli", "recall"]
   pyapi:
     build:
       context: ./py-app
@@ -23,7 +18,7 @@ services:
       - 5005:5000
     networks:
       - my-net
-    command: ["python", "app.py", "api"]
+    command: ["api"]
   mysqldb:
     image: "mysql:8.0"
     restart: always
