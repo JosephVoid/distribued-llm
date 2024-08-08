@@ -66,13 +66,19 @@ def run_api():
     app = Flask(__name__)
 
     @app.route("/request-model", methods=["POST"])
-    def post_endpoint():
+    def request_endpoint():
         if not request.is_json:
             return jsonify({"error": "Request must be JSON"}), 400
 
         data = request.get_json()
         model_response = request_model(data["message"], data["model"])
         return jsonify(model_response), 200
+
+    @app.route("/clear", methods=["POST"])
+    def clear_endpoint():
+        with open("context.txt", "r+") as file:
+            file.truncate(0)
+        return jsonify({"status": "Success"}), 200
 
     return app
 
